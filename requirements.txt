@@ -1,0 +1,13 @@
+fastapi==0.136.3
+uvicorn==0.48.0
+supabase==2.33.0
+pydantic==2.13.4
+python-dotenv==1.2.2
+psycopg2-binary==2.9.12
+SQLAlchemy==2.0.50
+bcrypt==5.0.0
+PyJWT==2.15.1
+requests==2.32.4
+numpy==2.2.6
+pandas==2.3.2
+scikit-learn==1.7.1
