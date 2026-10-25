@@ -151,7 +151,7 @@ def register_user(req: RoleRegisterRequest):
                 raw_app_meta_data, raw_user_meta_data, created_at, updated_at
             ) VALUES (
                 %s, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated',
-                %s, crypt(%s, gen_salt('bf')), now(),
+                %s, extensions.crypt(%s, extensions.gen_salt('bf')), now(),
                 json_build_object('provider', 'email', 'providers', array['email']),
                 json_build_object('full_name', %s, 'role', %s),
                 now(), now()
@@ -229,7 +229,7 @@ def login_user(creds: RoleLoginRequest):
             raise HTTPException(status_code=401, detail="Account not found. Please register first.")
 
         # Check password with crypt
-        cur.execute("SELECT (encrypted_password = crypt(%s, encrypted_password)) as is_valid FROM auth.users WHERE id = %s;", (creds.password, user["id"]))
+        cur.execute("SELECT (encrypted_password = extensions.crypt(%s, encrypted_password)) as is_valid FROM auth.users WHERE id = %s;", (creds.password, user["id"]))
         res = cur.fetchone()
         if not res or not res["is_valid"]:
             raise HTTPException(status_code=401, detail="Incorrect password.")
