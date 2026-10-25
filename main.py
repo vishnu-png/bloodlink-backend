@@ -55,7 +55,7 @@ def debug_db():
 def root_health():
     return {"status": "online", "platform": "BloodLink AI", "database": "Supabase"}
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:SXBcFFj6M9joI4E3@db.gfpohapisucgiieraxrh.supabase.co:5432/postgres")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres.gfpohapisucgiieraxrh:SXBcFFj6M9joI4E3@aws-0-ap-southeast-2.pooler.supabase.com:5432/postgres")
 MODELS_DIR = os.path.join(os.path.dirname(__file__), "ml", "saved_models")
 
 gmm_artifact, svm_artifact, gb_artifact, shortage_artifact = None, None, None, None
