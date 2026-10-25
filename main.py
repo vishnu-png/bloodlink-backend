@@ -38,6 +38,19 @@ app.add_middleware(
 )
 
 
+@app.get("/api/debug-db")
+def debug_db():
+    import traceback
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+        cur.execute("SELECT 1;")
+        res = cur.fetchone()[0]
+        conn.close()
+        return {"database_connection": "SUCCESS", "result": res}
+    except Exception as e:
+        return {"database_connection": "FAILED", "error": str(e), "traceback": traceback.format_exc()}
+
 @app.get("/")
 def root_health():
     return {"status": "online", "platform": "BloodLink AI", "database": "Supabase"}
