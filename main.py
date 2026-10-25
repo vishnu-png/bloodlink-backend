@@ -10,10 +10,7 @@ BloodLink AI - Authentic Production Backend & Matching Core
 import os
 import math
 import uuid
-import joblib
 import json
-import numpy as np
-import pandas as pd
 from typing import List, Optional
 from datetime import datetime, timedelta
 from fastapi import FastAPI, HTTPException, Depends, Header, Query
@@ -48,15 +45,8 @@ def serve_web_portal():
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:SXBcFFj6M9joI4E3@db.gfpohapisucgiieraxrh.supabase.co:5432/postgres")
 MODELS_DIR = os.path.join(os.path.dirname(__file__), "ml", "saved_models")
 
-try:
-    gmm_artifact = joblib.load(os.path.join(MODELS_DIR, "gmm_donor_segmentation.joblib"))
-    svm_artifact = joblib.load(os.path.join(MODELS_DIR, "svm_response_predictor.joblib"))
-    gb_artifact = joblib.load(os.path.join(MODELS_DIR, "gb_donor_ranker.joblib"))
-    shortage_artifact = joblib.load(os.path.join(MODELS_DIR, "shortage_forecaster.joblib"))
-    print("SUCCESS: 4 ML Models initialized for live inference.")
-except Exception as e:
-    print(f"ML Pipeline Warning: {e}")
-    gmm_artifact, svm_artifact, gb_artifact, shortage_artifact = None, None, None, None
+gmm_artifact, svm_artifact, gb_artifact, shortage_artifact = None, None, None, None
+print("SUCCESS: Production backend online with Supabase.")
 
 COMPATIBILITY = {
     'A+': ['A+', 'A-', 'O+', 'O-'],
