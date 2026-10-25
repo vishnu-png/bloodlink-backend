@@ -39,8 +39,8 @@ app.add_middleware(
 
 
 @app.get("/")
-def serve_web_portal():
-    return FileResponse(r"c:\Users\Vishnu\Downloads\blood bank web\index.html")
+def root_health():
+    return {"status": "online", "platform": "BloodLink AI", "database": "Supabase"}
 
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:SXBcFFj6M9joI4E3@db.gfpohapisucgiieraxrh.supabase.co:5432/postgres")
 MODELS_DIR = os.path.join(os.path.dirname(__file__), "ml", "saved_models")
